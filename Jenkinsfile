@@ -26,14 +26,14 @@ podTemplate(label: '12-mall',
         stage('Build'){
             container('docker'){
                 script {
-                    appImage = docker.build("979050235289.dkr.ecr.ap-southeast-2.amazonaws.com/"+"${env.JOB_NAME}")
+                    appImage = docker.build("052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/"+"${env.JOB_NAME}")
                 }
             }
         }
         stage('Push'){
             container('docker'){
                 script {
-                    docker.withRegistry("https://979050235289.dkr.ecr.ap-southeast-2.amazonaws.com/", "ecr:ap-southeast-2:ecr-cred"){
+                    docker.withRegistry("https://052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/", "ecr:ap-southeast-1:ecr-cred"){
                         appImage.push("${env.BUILD_NUMBER}")
                         appImage.push("latest")
                     }
